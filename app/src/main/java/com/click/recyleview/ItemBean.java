@@ -8,28 +8,28 @@ import java.io.Serializable;
 
 public class ItemBean implements Serializable{
 
-    private String account;
-    private String password;
+    private String contacts;
+    private String phone;
 
 
-    public ItemBean(String account, String password) {
-        this.account = account;
-        this.password = password;
+    public ItemBean(String contacts, String phone) {
+        this.contacts = contacts;
+        this.phone = phone;
     }
 
-    public String getAccount() {
-        return account;
+    public String getContacts() {
+        return contacts;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
+    public void setContacts(String contacts) {
+        this.contacts = contacts;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

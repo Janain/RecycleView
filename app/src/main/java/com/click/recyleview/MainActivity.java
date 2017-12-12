@@ -15,23 +15,38 @@ public class MainActivity extends Activity  {
 
     private RecyclerView mRecyclerView;
 
-    private List<ItemBean> mDataList ;
+    private List<ItemBean> mDataList = new ArrayList<ItemBean>();
 
     private MyAdapter myAdapter;
 
     private Button add;
 
-    private String account,password;
+    String contacts,phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        account = getIntent().getStringExtra("account");
-        password = getIntent().getStringExtra("password");
         initView();
     }
+    final int RESULT_CODE = 101;
+    final int REQUEST_CODE = 1;
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == REQUEST_CODE) {
+            if (resultCode == RESULT_CODE) {
+                contacts = data.getStringExtra("contacts");
+                phone = data.getStringExtra("phone");
+                mDataList.add(new ItemBean(contacts,phone));
+                myAdapter = new MyAdapter(this, mDataList);
+                mRecyclerView.setAdapter(myAdapter);
+                myAdapter.notifyDataSetChanged();
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
     /**
      * 初始化
      */
@@ -42,57 +57,13 @@ public class MainActivity extends Activity  {
         mRecyclerView = (RecyclerView) findViewById(R.id.main_recylist);
         //设置线性管理器
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
-        mDataList = new ArrayList<ItemBean>();
-        ItemBean data = new ItemBean(account,password);
-        mDataList.add(data);
-        /*
-        设置适配器
-         */
-        myAdapter = new MyAdapter(this,mDataList);
-        mRecyclerView.setAdapter(myAdapter);
-
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mRecyclerView!=null){
-                    Intent intent = new Intent(MainActivity.this,TwoActivity.class);
-                    startActivity(intent);
-                }else{
-                    ItemBean data = new ItemBean(account, password);
+                Intent intent = new Intent(getApplicationContext(), TwoActivity.class);
+                startActivityForResult(intent, REQUEST_CODE);
 
-                    mDataList.add(data);
-                    myAdapter.notifyItemInserted(0);
-                    myAdapter.notifyItemRangeChanged(0, mDataList.size());
-                }
             }
         });
-
-
     }
-
-
-    /**
-     * //        for (int i=0;i<50;i++){
-     //            mDataList.add("内容 - "+i);
-     //        }
-
-     * 初始化数据
-     */
-//    private void initData() {
-//
-//
-//        mDataList = new ArrayList<ItemBean>();
-//        ItemBean data = new ItemBean(account,password);
-//        mDataList.add(data);
-//        /*
-//        设置适配器
-//         */
-//        myAdapter = new MyAdapter(this,mDataList);
-//        mRecyclerView.setAdapter(myAdapter);
-////        myAdapter.notifyDataSetChanged();
-//    }
-
-
 }

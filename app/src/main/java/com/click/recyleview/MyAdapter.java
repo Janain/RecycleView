@@ -17,13 +17,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     private List<ItemBean> mDataList;
 
-    public MyAdapter(Context context,List<ItemBean> list) {
-            this.mDataList = list;
+    public MyAdapter(Context context, List<ItemBean> list) {
+        this.mDataList = list;
     }
 
     public void addList(List<ItemBean> list) {
         mDataList = list;
-//        notifyDataSetChanged();
+        notifyDataSetChanged();
     }
 
     @Override
@@ -38,21 +38,20 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
 
-
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
-//        //获取这个TextView
+        //获取这个TextView
 //        ItemBean bean = mDataList.get(position);
 //
-//        holder.accTvTitle.setText(bean.getAccount());
-//        holder.pasTvTitle.setText(bean.getPassword());
+//        holder.conTvTitle.setText(bean.getContacts());
+//        holder.phoTvTitle.setText(bean.getPhone());
 
 
         if (holder instanceof ViewHolder) {
             ViewHolder viewHolder = (ViewHolder) holder;
-            viewHolder.accTvTitle.setText(mDataList.get(position).getAccount() + "");
-            viewHolder.pasTvTitle.setText(mDataList.get(position).getPassword() + "");
+            viewHolder.conTvTitle.setText(mDataList.get(position).getContacts() + "");
+            viewHolder.phoTvTitle.setText(mDataList.get(position).getPhone() + "");
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -73,18 +72,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView accTvTitle;
-        private TextView pasTvTitle;
+        private TextView conTvTitle;
+        private TextView phoTvTitle;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            accTvTitle = (TextView) itemView.findViewById(R.id.account_item);
-            pasTvTitle = (TextView) itemView.findViewById(R.id.password_item);
-
+            conTvTitle = (TextView) itemView.findViewById(R.id.account_item);
+            phoTvTitle = (TextView) itemView.findViewById(R.id.phone_item);
         }
-
-
     }
-
-
 }

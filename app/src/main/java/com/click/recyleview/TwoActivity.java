@@ -11,39 +11,43 @@ import android.widget.Toast;
 
 /**
  * Created by S on 2017/11/16.
- *
  */
 
-public class TwoActivity extends AppCompatActivity{
-    String acc,pas;
-    EditText account,password;
+public class TwoActivity extends AppCompatActivity {
+
+    String contacts, phone;
+    EditText conEdit, phoEdit;
     Button ok;
+    final int RESULT_CODE = 101;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.intent);
+        initView();
+    }
 
+    public void initView() {
 
-          account = (EditText) findViewById(R.id.account);
-          password = (EditText) findViewById(R.id.password);
-          ok = (Button) findViewById(R.id.ok);
+        conEdit = (EditText) findViewById(R.id.account);
+        phoEdit = (EditText) findViewById(R.id.password);
+        ok = (Button) findViewById(R.id.ok);
 
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                acc = account.getText().toString().trim();
-                pas = password.getText().toString().trim();
 
+                contacts = conEdit.getText().toString().trim();
+                phone = phoEdit.getText().toString().trim();
 
                 Intent intent = new Intent();
 
-                intent.putExtra("account", acc);
-                intent.putExtra("password", pas);
-                intent.setClass(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                Toast.makeText(getApplicationContext(),"提交成功", Toast.LENGTH_SHORT).show();
+                intent.putExtra("contacts", contacts);
+                intent.putExtra("phone", phone);
 
+                setResult(RESULT_CODE, intent);
                 finish();
+                Toast.makeText(getApplicationContext(), "提交成功", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">recyleview</string>
+    <string name="name">小王</string>
+    <string name="contacts">联 系人</string>
+    <string name="phone">电话</string>
+    <string name="phone_number">137****7057</string>
+    <string name="add_btn">添加</string>
 </resources>
